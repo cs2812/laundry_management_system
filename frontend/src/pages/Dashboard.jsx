@@ -9,9 +9,13 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const {isAuth} =useSelector((store)=>store.authReducer)
+  const navigate = useNavigate()
   let data = [
     { count: 1, title: "New Request", colour: "#fed144" },
     { count: 2, title: "Accept!", colour: "#2db3e5" },
@@ -23,6 +27,11 @@ const Dashboard = () => {
     { name: "Bootom Wear Laundry Price", price: 22 },
     { name: "Woolen Cloth Laundry Price", price: 20 },
   ];
+  useEffect(()=>{
+    if(!isAuth){
+      navigate("/login")
+    }
+  },[isAuth])
   return (
     <Box p="1rem" w="80%">
       {/* Request Status */}

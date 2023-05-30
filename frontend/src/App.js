@@ -1,13 +1,16 @@
 import { Box, Flex} from "@chakra-ui/react";
-import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import LaundryRequest from "./pages/LaundryRequest";
-import RequestStatus from "./pages/RequestStatus";
-import Profile from "./pages/Profile";
-import SideBar from "./components/SideBar";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
+import Navbar from "./components/Navbar";
+import SideBar from "./components/SideBar"
+import Dashboard from "./pages/Dashboard"
+import LaundryRequest from "./pages/LaundryRequest"
+import Profile from "./pages/Profile"
+import LoginPage from "./pages/LoginPage"
+import SignupPage from "./pages/SignupPage"
+// import PrivateRoute from "./HOF/PrivateRoute";
+
+
+
 
 function App() {
 
@@ -19,7 +22,7 @@ function App() {
         <Route path="/profile" element={<><Navbar/> <Flex><SideBar/><Profile /></Flex></>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<SignupPage />} />
-        <Route path="/request-status" element={<RequestStatus />} />
+        {/* <Route path="/request-status" element={<RequestStatus />} /> */}
       </Routes>
     </Box>
   );

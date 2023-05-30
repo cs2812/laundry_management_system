@@ -1,10 +1,13 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 import { GiHamburgerMenu } from "react-icons/gi";
-import Menus from "./Menus";
 import Notification from "./Notification";
+import Menus from "./Menus";
 
 const Navbar = () => {
+  const { isAuth } = useSelector((state) => state.authReducer);
+  console.log(isAuth);
   return (
     <Flex
       boxShadow="md"

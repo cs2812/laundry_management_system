@@ -6,13 +6,24 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({reg,setSignup}) => {
+const LoginPage = () => {
+  const navigate = useNavigate()
+  const {isAuth} =useSelector((store)=>store.authReducer)
+
 
   const redirect=()=>{
-    setSignup(!reg)
+    navigate("/registration")
   }
+
+  useEffect(()=>{
+    if(isAuth){
+      navigate("/")
+    }
+  },[isAuth])
 
   return (
     <Box bgColor={"#f2f2f2"} h={"100vh"}>
@@ -48,8 +59,8 @@ const LoginPage = ({reg,setSignup}) => {
 
         {/*<---Form Footer---->*/}
         <Box textAlign={"center"} p="0.5rem" pb="0.5rem">
-          <Text onClick={redirect}>Registration</Text>
-          <Text>Forget Password?</Text>
+          <Text cursor={"pointer"} color={"blue"} onClick={redirect}>Create New Account?</Text>
+          <Text cursor={"pointer"} color={"blue"}>Forget Password?</Text>
         </Box>
       </Box>
     </Box>
