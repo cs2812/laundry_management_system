@@ -24,7 +24,7 @@ const Dashboard = () => {
     { name: "Woolen Cloth Laundry Price", price: 20 },
   ];
   return (
-    <Box p="1rem">
+    <Box p="1rem" w="80%">
       {/* Request Status */}
       <Flex justifyContent={"space-between"}>
         {data.map((ele, i) => (

@@ -25,7 +25,7 @@ const LaundryRequest = () => {
     console.log(form);
   };
   return (
-    <Box p="1rem" boxSizing="border-box">
+    <Box p="1rem" w="80%" boxSizing="border-box">
       
       {/* Laundry Request Form*/}
       <Box>

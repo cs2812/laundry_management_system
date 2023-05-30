@@ -1,12 +1,12 @@
-import { Box } from '@chakra-ui/react'
-import React from 'react'
+// import { Box } from '@chakra-ui/react'
+// import React from 'react'
 
-const RequestStatus = () => {
-  return (
-    <Box>
-      status
-    </Box>
-  )
-}
+// const RequestStatus = () => {
+//   return (
+//     <Box>
+//       status
+//     </Box>
+//   )
+// }
 
-export default RequestStatus
+// export default RequestStatus

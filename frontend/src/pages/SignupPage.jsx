@@ -8,7 +8,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const SignupPage = () => {
+const SignupPage = ({ reg, setLogin }) => {
+  const redirect = () => {
+    setLogin(!reg);
+  };
+
   return (
     <Box bgColor={"#f2f2f2"} h={"100vh"}>
       <Box
@@ -52,7 +56,7 @@ const SignupPage = () => {
 
         {/*<---Form Footer---->*/}
         <Box textAlign={"center"} p="1rem">
-          <Text>Login?</Text>
+          <Text onClick={redirect}>Login?</Text>
         </Box>
       </Box>
     </Box>
