@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { AiFillDashboard } from "react-icons/ai";
 import { BsFillFolderFill } from "react-icons/bs";
 import { BiChevronRight } from "react-icons/bi";
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import LaundryRequest from "./pages/LaundryRequest";
@@ -16,20 +16,22 @@ function App() {
       route: "Dashboard",
       icon: <AiFillDashboard size="20px" />,
       arrow: "",
-      navigation: "/profile",
+      navigation: "/",
     },
     {
       route: "Laundry Request",
       icon: <BsFillFolderFill size="20px" />,
       arrow: <BiChevronRight size={"20px"} />,
+      navigation: "/laundry-request",
     },
     {
       route: "Request Status",
       icon: <BsFillFolderFill size="20px" />,
       arrow: <BiChevronRight size={"20px"} />,
+      navigation: "/request-status",
     },
   ];
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // navigate("/profile")
@@ -42,15 +44,16 @@ function App() {
       <Flex>
         {/* Navigation box*/}
         <Box w={"20%"} h="90.5vh" bgColor={"#234465"} color={"#d0d6db"}>
-          {nav.map((ele) => (
+          {nav.map((ele, i) => (
             <Flex
+              key={i}
               p="1rem"
               pr={"30px"}
               cursor={"pointer"}
               justifyContent={"space-between"}
               _hover={{ bg: "gray.400", color: "black" }}
               onClick={() => {
-                // navigate(ele.navigation);
+                navigate(ele.navigation);
               }}
             >
               <Flex>
