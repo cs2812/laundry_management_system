@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { AiFillDashboard } from "react-icons/ai";
 import { BsFillFolderFill } from "react-icons/bs";
 import { BiChevronRight } from "react-icons/bi";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import { useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 import LaundryRequest from "./pages/LaundryRequest";

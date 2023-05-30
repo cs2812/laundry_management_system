@@ -29,7 +29,6 @@ const Notification = () => {
             as="samp"
             fontSize={"12px"}
             color={"white"}
-            // border={"1px solid"}
             borderRadius={"50%"}
             pl="0.3rem"
             pr="0.3rem"

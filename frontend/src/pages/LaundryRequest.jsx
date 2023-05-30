@@ -4,7 +4,7 @@ import React from 'react'
 const LaundryRequest = () => {
   return (
     <Box>
-      laundry
+      
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-import { Box, Flex, Text} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Menus from "./Menus";
@@ -19,10 +19,10 @@ const Navbar = () => {
           <GiHamburgerMenu />
         </Text>
       </Box>
-      <Flex gap="30px">
-        <Notification/>
+      <Flex>
+        <Notification />
         <Box>
-          <Menus/>
+          <Menus />
         </Box>
       </Flex>
     </Flex>
