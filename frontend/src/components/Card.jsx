@@ -4,7 +4,7 @@ import { BiChevronRight } from "react-icons/bi";
 
 const Card = ({count,title,colour}) => {
   return (
-    <Box color={"white"} border={"2px solid"} borderRadius={"10px"} w="250px" bgColor={colour}>
+    <Box shadow={"base"} color={"white"} borderRadius={"10px"} w="250px" bgColor={colour}>
       <Box h="70px" p={"1rem"}>
         <Text>{count} {title}</Text>
       </Box>
@@ -18,5 +18,4 @@ const Card = ({count,title,colour}) => {
     </Box>
   );
 };
-
 export default Card;

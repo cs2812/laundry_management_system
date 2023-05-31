@@ -7,6 +7,7 @@ import LaundryRequest from "./pages/LaundryRequest"
 import Profile from "./pages/Profile"
 import LoginPage from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage"
+import RequestStatus from "./pages/RequestStatus";
 // import PrivateRoute from "./HOF/PrivateRoute";
 
 
@@ -20,9 +21,9 @@ function App() {
         <Route path="/" element={<><Navbar /><Flex><SideBar /><Dashboard /></Flex></>}/>
         <Route path="/laundry-request" element={<><Navbar /><Flex><SideBar /><LaundryRequest /></Flex></>}/>
         <Route path="/profile" element={<><Navbar/> <Flex><SideBar/><Profile /></Flex></>} />
+        <Route path="/request-status" element={<><Navbar/><Flex><SideBar/><RequestStatus/></Flex></>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<SignupPage />} />
-        {/* <Route path="/request-status" element={<RequestStatus />} /> */}
       </Routes>
     </Box>
   );

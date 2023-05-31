@@ -6,7 +6,7 @@ const LaundryRequest = require("../model/appModel");
 appRoute.get("/:id", async (req, res) => {
   try {
     let { id } = req.params;
-    let data = await LaundryRequest.find({ userId:id });
+    let data = await LaundryRequest.find({ userId:id }).sort({_id:-1});
     if (!data) {
       return res.json({ message: "Not request found" });
     }
@@ -34,7 +34,7 @@ appRoute.put("/confirm-request/:id", async (req, res) => {
     const { id } = req.params;
 
     // Find the laundry request by ID
-    const laundryRequest = await LaundryRequest.findById({ _id: id });
+    const laundryRequest = await LaundryRequest.findById({ _id:id });
 
     if (!laundryRequest) {
       return res.status(404).json({ error: "Laundry request not found" });

@@ -8,17 +8,20 @@ import {
   Select,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { createRequest } from "../store/app/app_Action";
 
 const LaundryRequest = () => {
-  const { isAuth } = useSelector((store) => store.authReducer);
+  const { isAuth,userId } = useSelector((store) => store.authReducer);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    pickupData: "",
-    topwear: "",
-    bottomwear: "",
-    woolenCloth: "",
+    userId,
+    pickupDate: "",
+    topwears: "",
+    bottomwears: "",
+    woolenCloths: "",
     others: "",
     serviceType: "",
     contactNumber: "",
@@ -27,6 +30,7 @@ const LaundryRequest = () => {
 
   const handleSubmit = () => {
     // console.log(form);
+    dispatch(createRequest(form))
   };
   useEffect(() => {
     if (!isAuth) {
@@ -35,13 +39,14 @@ const LaundryRequest = () => {
   }, [isAuth]);
 
   return (
-    <Box p="1rem" w="80%" boxSizing="border-box">
+    <Box p="1rem" w="80%" boxSizing="border-box" bg="#f7f7f7">
       {/* Laundry Request Form*/}
       <Box>
         <Flex gap="10px">
           <FormControl>
             <FormLabel>Select Pickup Date</FormLabel>
             <Input
+              bgColor="whiteAlpha.700"
               onChange={(e) => setForm({ ...form, pickupData: e.target.value })}
               size="sm"
               type="datetime-local"
@@ -50,7 +55,8 @@ const LaundryRequest = () => {
           <FormControl>
             <FormLabel>Topwear</FormLabel>
             <Input
-              onChange={(e) => setForm({ ...form, topwear: e.target.value })}
+              bgColor="whiteAlpha.700"
+              onChange={(e) => setForm({ ...form, topwears: e.target.value })}
               size="sm"
               placeholder="Tshirt, Top, Shirt"
             />
@@ -59,7 +65,8 @@ const LaundryRequest = () => {
         <FormControl>
           <FormLabel>Bottomwear</FormLabel>
           <Input
-            onChange={(e) => setForm({ ...form, bottomwear: e.target.value })}
+            bgColor="whiteAlpha.700"
+            onChange={(e) => setForm({ ...form, bottomwears: e.target.value })}
             size="sm"
             placeholder="Lower, jeans, Leggins"
           />
@@ -67,7 +74,8 @@ const LaundryRequest = () => {
         <FormControl>
           <FormLabel>Woolen Cloth</FormLabel>
           <Input
-            onChange={(e) => setForm({ ...form, woolenCloth: e.target.value })}
+            bgColor="whiteAlpha.700"
+            onChange={(e) => setForm({ ...form, woolenCloths: e.target.value })}
             size="sm"
             placeholder="Woolen Cloth"
           />
@@ -75,6 +83,7 @@ const LaundryRequest = () => {
         <FormControl>
           <FormLabel>Others</FormLabel>
           <Input
+            bgColor="whiteAlpha.700"
             onChange={(e) => setForm({ ...form, others: e.target.value })}
             size="sm"
             placeholder="Others"
@@ -84,6 +93,7 @@ const LaundryRequest = () => {
         <FormControl>
           <FormLabel>Select Service Type</FormLabel>
           <Select
+            bgColor="whiteAlpha.700"
             onChange={(e) => setForm({ ...form, serviceType: e.target.value })}
             placeholder="- - - - - - - -"
           >
@@ -94,6 +104,7 @@ const LaundryRequest = () => {
         <FormControl>
           <FormLabel>Contact Number</FormLabel>
           <Input
+            bgColor="whiteAlpha.700"
             onChange={(e) =>
               setForm({ ...form, contactNumber: e.target.value })
             }
@@ -105,6 +116,7 @@ const LaundryRequest = () => {
         <FormControl>
           <FormLabel>Description</FormLabel>
           <Input
+            bgColor="whiteAlpha.700"
             onChange={(e) => setForm({ ...form, description: e.target.value })}
             size="sm"
             placeholder="Description(if any)"
