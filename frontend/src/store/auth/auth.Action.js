@@ -1,12 +1,13 @@
+
 import axios from "axios";
 import { LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, REGISTER_USER_SUCCESS } from "./auth_Type";
 
-const baseurl = "https://localhost:8080/users";
+const baseurl = "http://localhost:8080/user";
 
 export const registerUser = (form) => (dispatch) => {
   //   dispatch({ type: AUTH_LOADING_ON });
   axios
-    .post(`${baseurl}/singup`, form)
+    .post(`${baseurl}/signup`, form)
     .then((res) => {
       dispatch({type:REGISTER_USER_SUCCESS})
       alert("User Registered successfully");
@@ -21,8 +22,8 @@ export const userLogin = (form) => (dispatch) => {
   axios
     .post(`${baseurl}/login`, form)
     .then((res) => {
-      if (res.data.message === "userLogedin") {
-        alert("Logedin successfully");
+      if (res.data.message === "User logedin successfully") {
+        alert("User logedin successfully");
         dispatch({ type: LOGIN_USER_SUCCESS, payload: res.data.data });
       } else {
         console.log("error", res);

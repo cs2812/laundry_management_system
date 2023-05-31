@@ -6,14 +6,23 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { userLogin } from "../store/auth/auth.Action";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { isAuth } = useSelector((store) => store.authReducer);
 
+  const [form ,setForm]=useState({
+    email:"",
+    password:""
+  })
+const handleLogin=()=>{
+  dispatch(userLogin(form))
+}
   const redirect = () => {
     navigate("/registration");
   };
@@ -45,13 +54,13 @@ const LoginPage = () => {
         <Box p="1rem">
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
-            <Input placeholder="Email" />
+            <Input onChange={(e)=>setForm({...form,email:e.target.value})} placeholder="Email" />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Password</FormLabel>
-            <Input placeholder="Password" />
+            <Input onChange={(e)=>setForm({...form, password:e.target.value})} placeholder="Password" />
           </FormControl>
-          <Button w="100%" mt="10px" colorScheme="blue">
+          <Button onClick={handleLogin} w="100%" mt="10px" colorScheme="blue">
             Login
           </Button>
         </Box>

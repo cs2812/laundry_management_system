@@ -10,10 +10,16 @@ import {
 import React from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../store/auth/auth.Action";
 
 const Menus = () => {
   // console.log(data)
-  const handleLogout = () => {};
+  const {username} = useSelector((store)=>store.authReducer)
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(userLogout())
+  };
   return (
     <Menu>
       <MenuButton
@@ -24,7 +30,7 @@ const Menus = () => {
       >
         <Flex gap="5px">
           <CgProfile size="28px" />
-          <Text fontSize={"20px"}>Name</Text>
+          <Text fontSize={"20px"}>{username}</Text>
         </Flex>
       </MenuButton>
       <MenuList marginLeft={"4.6%"} color={"black"}>

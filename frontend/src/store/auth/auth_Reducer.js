@@ -4,30 +4,29 @@ const getToken = localStorage.getItem("userId");
 const getUser = localStorage.getItem("name");
 const initialState = {
   isAuth: getToken ? true : false,
-  // isAuth:  false,
   register: false,
-  token: getToken ? getToken : "",
-  userName: getUser ? getUser : "Chetan",
+  username: getUser ? getUser : "Chetan",
+  // token: getToken ? getToken : "",
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case LOGIN_USER_SUCCESS: {
-      localStorage.setItem("userId", payload.id);
-      localStorage.setItem("name", payload.un);
+      localStorage.setItem("userId", payload._id);
+      localStorage.setItem("username", payload.username);
       return {
         ...state,
         isAuth: true,
-        token: payload.id,
-        userName: payload.userName,
+        username: payload.username,
       };
     }
     case LOGIN_USER_FAIL: {
+      localStorage.removeItem("userId")
+      localStorage.removeItem("username")
       return {
         ...state,
         isAuth: false,
-        token: "",
-        userName: "",
+        username: "",
       };
     }
     case REGISTER_USER_SUCCESS:{
