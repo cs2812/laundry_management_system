@@ -72,6 +72,7 @@ userRoute.put("/change-profile/:id", async (req, res) => {
     await user.save();
     res.status(200).json({ message: "Profile changed successfully",data:user });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "server error", error });
   }
 });

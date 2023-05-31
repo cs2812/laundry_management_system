@@ -7,9 +7,13 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LaundryRequest = () => {
+  const { isAuth } = useSelector((store) => store.authReducer);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     pickupData: "",
     topwear: "",
@@ -22,11 +26,16 @@ const LaundryRequest = () => {
   });
 
   const handleSubmit = () => {
-    console.log(form);
+    // console.log(form);
   };
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+  }, [isAuth]);
+
   return (
     <Box p="1rem" w="80%" boxSizing="border-box">
-      
       {/* Laundry Request Form*/}
       <Box>
         <Flex gap="10px">

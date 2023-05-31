@@ -32,6 +32,7 @@ const Dashboard = () => {
       navigate("/login")
     }
   },[isAuth])
+  
   return (
     <Box p="1rem" w="80%">
       {/* Request Status */}

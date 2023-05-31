@@ -12,13 +12,19 @@ import { BiChevronDown } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store/auth/auth.Action";
+import { useNavigate } from "react-router-dom";
 
 const Menus = () => {
   // console.log(data)
-  const {username} = useSelector((store)=>store.authReducer)
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const { username } = useSelector((store) => store.authReducer);
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
-    dispatch(userLogout())
+    dispatch(userLogout());
+  };
+  const redirect = () => {
+    navigate("/profile");
   };
   return (
     <Menu>
@@ -34,7 +40,7 @@ const Menus = () => {
         </Flex>
       </MenuButton>
       <MenuList marginLeft={"4.6%"} color={"black"}>
-        <MenuItem>Profile</MenuItem>
+        <MenuItem onClick={redirect}>Profile</MenuItem>
         <MenuItem onClick={handleLogout}>Log Out</MenuItem>
       </MenuList>
     </Menu>
