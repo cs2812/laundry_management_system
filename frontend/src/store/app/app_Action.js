@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   LAUNDRY_GET_REQUEST_SUCCESS,
-  LAUNDRY_REQUEST_ACCEPT,
+  LAUNDRY_REQUEST_CONFIRM,
   LAUNDRY_REQUEST_SUCCESS,
 } from "./app_Type";
 
@@ -36,7 +36,7 @@ export const acceptRequest = (requestId) => (dispatch) => {
   axios
     .put(`${baseurl}/confirm-request/${requestId}`)
     .then((res) => {
-      dispatch({ type: LAUNDRY_REQUEST_ACCEPT, payload: res.data.data });
+      dispatch({ type: LAUNDRY_REQUEST_CONFIRM, payload: res.data.data });
     })
     .catch((error) => {
       console.log("Error", error);

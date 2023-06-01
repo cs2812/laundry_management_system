@@ -15,12 +15,14 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { isAuth } = useSelector((store) => store.authReducer);
+  const { pendingRequest, confirmRequest, inprocessRequest, finishRequest } =
+    useSelector((store) => store.appReducer);
   const navigate = useNavigate();
   let data = [
-    { count: 1, title: "New Request", colour: "#fed144" },
-    { count: 2, title: "Accept!", colour: "#2db3e5" },
-    { count: 3, title: "Inprocess!", colour: "#17c22e" },
-    { count: 4, title: "Finish!", colour: "#fc2747" },
+    { count: pendingRequest, title: "New Request", colour: "#fed144" },
+    { count: confirmRequest, title: "Accept!", colour: "#2db3e5" },
+    { count: inprocessRequest, title: "Inprocess!", colour: "#17c22e" },
+    { count: finishRequest, title: "Finish!", colour: "#fc2747" },
   ];
   let LaundryPrice = [
     { name: "Top Wear Laundry Price", price: 12 },
