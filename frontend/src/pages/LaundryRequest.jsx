@@ -13,8 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { createRequest } from "../store/app/app_Action";
 
 const LaundryRequest = () => {
-  const { isAuth,userId } = useSelector((store) => store.authReducer);
-  const dispatch = useDispatch()
+  const { isAuth, userId } = useSelector((store) => store.authReducer);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     userId,
@@ -29,8 +29,7 @@ const LaundryRequest = () => {
   });
 
   const handleSubmit = () => {
-    // console.log(form);
-    dispatch(createRequest(form))
+    dispatch(createRequest(form));
   };
   useEffect(() => {
     if (!isAuth) {
@@ -47,7 +46,7 @@ const LaundryRequest = () => {
             <FormLabel>Select Pickup Date</FormLabel>
             <Input
               bgColor="whiteAlpha.700"
-              onChange={(e) => setForm({ ...form, pickupData: e.target.value })}
+              onChange={(e) => setForm({ ...form, pickupDate: e.target.value })}
               size="sm"
               type="datetime-local"
             />
@@ -97,8 +96,8 @@ const LaundryRequest = () => {
             onChange={(e) => setForm({ ...form, serviceType: e.target.value })}
             placeholder="- - - - - - - -"
           >
-            <option value="fast">Fast Service</option>
-            <option value="regular">Regular Service</option>
+            <option value="Fast">Fast Service</option>
+            <option value="Regular">Regular Service</option>
           </Select>
         </FormControl>
         <FormControl>

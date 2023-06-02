@@ -10,13 +10,17 @@ import {
 } from "@chakra-ui/react";
 import Card from "../components/Card";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getRequest } from "../store/app/app_Action";
+import { getNotification } from "../store/notification/notAction";
 
 const Dashboard = () => {
-  const { isAuth } = useSelector((store) => store.authReducer);
+  const { isAuth, userId } = useSelector((store) => store.authReducer);
   const { pendingRequest, confirmRequest, inprocessRequest, finishRequest } =
     useSelector((store) => store.appReducer);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   let data = [
     { count: pendingRequest, title: "New Request", colour: "#fed144" },
@@ -30,6 +34,9 @@ const Dashboard = () => {
     { name: "Woolen Cloth Laundry Price", price: 20 },
   ];
   useEffect(() => {
+    dispatch(getRequest(userId));
+    dispatch(getNotification(userId));
+
     if (!isAuth) {
       navigate("/login");
     }
@@ -69,13 +76,15 @@ const Dashboard = () => {
                 })}
 
                 {/* Infromation of other type of cloth*/}
-                <Td fontWeight={500} border={"2px solid #f2f2f2"}>
-                  Other Price
-                </Td>
-                <Td border={"2px solid #f2f2f2"}>
-                  other price depand upon cloth varity(other than above three
-                  category)
-                </Td>
+                <Tr>
+                  <Td fontWeight={500} border={"2px solid #f2f2f2"}>
+                    Other Price
+                  </Td>
+                  <Td border={"2px solid #f2f2f2"}>
+                    other price depand upon cloth varity(other than above three
+                    category)
+                  </Td>
+                </Tr>
               </Tbody>
             </Table>
           </TableContainer>

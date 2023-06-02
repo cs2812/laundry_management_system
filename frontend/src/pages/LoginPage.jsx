@@ -13,16 +13,16 @@ import { userLogin } from "../store/auth/auth.Action";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { isAuth } = useSelector((store) => store.authReducer);
 
-  const [form ,setForm]=useState({
-    email:"",
-    password:""
-  })
-const handleLogin=()=>{
-  dispatch(userLogin(form))
-}
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const handleLogin = () => {
+    dispatch(userLogin(form));
+  };
   const redirect = () => {
     navigate("/registration");
   };
@@ -54,11 +54,17 @@ const handleLogin=()=>{
         <Box p="1rem">
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
-            <Input onChange={(e)=>setForm({...form,email:e.target.value})} placeholder="Email" />
+            <Input
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              placeholder="Email"
+            />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Password</FormLabel>
-            <Input onChange={(e)=>setForm({...form, password:e.target.value})} placeholder="Password" />
+            <Input
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              placeholder="Password"
+            />
           </FormControl>
           <Button onClick={handleLogin} w="100%" mt="10px" colorScheme="blue">
             Login

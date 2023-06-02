@@ -55,7 +55,7 @@ export const changePassword = (form) => (dispatch) => {
         dispatch({ type: LOGIN_USER_FAIL });
       } else {
         console.log("error", res);
-        alert("Process failed");
+        alert("Process failed. Enter Currect Password");
       }
     })
     .catch((err) => {

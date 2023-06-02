@@ -10,12 +10,12 @@ import {
 import React from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store/auth/auth.Action";
 import { useNavigate } from "react-router-dom";
 
 const Menus = () => {
-  // console.log(data)
   const navigate = useNavigate();
   const { username } = useSelector((store) => store.authReducer);
   const dispatch = useDispatch();
@@ -40,8 +40,15 @@ const Menus = () => {
         </Flex>
       </MenuButton>
       <MenuList marginLeft={"4.6%"} color={"black"}>
-        <MenuItem onClick={redirect}>Profile</MenuItem>
-        <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+        <MenuItem onClick={redirect}>
+          <CgProfile color="#969797" />{" "}
+          <span style={{ marginLeft: "10px" }}>Profile</span>{" "}
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          {" "}
+          <FiLogOut color="#969797" />{" "}
+          <span style={{ marginLeft: "10px" }}>Log out</span>
+        </MenuItem>
       </MenuList>
     </Menu>
   );

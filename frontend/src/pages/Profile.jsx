@@ -15,32 +15,31 @@ import { changePassword, changeProfile } from "../store/auth/auth.Action";
 
 const Profile = () => {
   const data = useSelector((store) => store.authReducer);
-  const dispatch = useDispatch()
-  const navitate = useNavigate()
+  const dispatch = useDispatch();
+  const navitate = useNavigate();
   const [form, setName] = useState({
-    userId:data.userId,
-    newUsername:data.username
+    userId: data.userId,
+    newUsername: data.username,
   });
-  const [password , setPassword]=useState({
-    userId:data.userId,
-    currentPassword:"",
-    newPassword:""
-  })
-  const handleChangePassword=()=>{
+  const [password, setPassword] = useState({
+    userId: data.userId,
+    currentPassword: "",
+    newPassword: "",
+  });
+  const handleChangePassword = () => {
     // console.log(password)
-    dispatch(changePassword(password))
-  }
-  const handleChangeProfile=()=>{
+    dispatch(changePassword(password));
+  };
+  const handleChangeProfile = () => {
     // console.log(form)
-    dispatch(changeProfile(form))
-  }
+    dispatch(changeProfile(form));
+  };
 
-  useEffect(()=>{
-    if(!data.isAuth){
-      navitate("/login")
+  useEffect(() => {
+    if (!data.isAuth) {
+      navitate("/login");
     }
-
-  },[data.isAuth])
+  }, [data.isAuth]);
 
   return (
     <Box bgColor="#f7f7f7" w="80%">
@@ -56,13 +55,20 @@ const Profile = () => {
           <FormControl>
             <FormLabel>Name</FormLabel>
             <Input
-              onChange={(e) => setName({...form,newUsername:e.target.value})}
+              onChange={(e) =>
+                setName({ ...form, newUsername: e.target.value })
+              }
               fontWeight={"500"}
               value={form.newUsername}
               placeholder="Enter name"
             />
           </FormControl>
-          <Button onClick={handleChangeProfile} colorScheme="blue" mt="10px" float={"right"}>
+          <Button
+            onClick={handleChangeProfile}
+            colorScheme="blue"
+            mt="10px"
+            float={"right"}
+          >
             Save
           </Button>
         </Box>
@@ -85,7 +91,9 @@ const Profile = () => {
           <FormControl>
             <FormLabel>Current Password</FormLabel>
             <Input
-              onChange={(e) => setPassword({...password,currentPassword:e.target.value})}
+              onChange={(e) =>
+                setPassword({ ...password, currentPassword: e.target.value })
+              }
               fontWeight={"500"}
               placeholder="Enter current Password"
             />
@@ -93,12 +101,19 @@ const Profile = () => {
           <FormControl mt="20px">
             <FormLabel>New Password</FormLabel>
             <Input
-              onChange={(e) => setPassword({...password,newPassword:e.target.value})}
+              onChange={(e) =>
+                setPassword({ ...password, newPassword: e.target.value })
+              }
               fontWeight={"500"}
               placeholder="Enter new password"
             />
           </FormControl>
-          <Button onClick={handleChangePassword} colorScheme="blue" mt="10px" float={"right"}>
+          <Button
+            onClick={handleChangePassword}
+            colorScheme="blue"
+            mt="10px"
+            float={"right"}
+          >
             Save
           </Button>
         </Box>

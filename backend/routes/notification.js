@@ -1,21 +1,16 @@
 const express = require("express");
-const { default: mongoose } = require("mongoose");
+const Notification = require("../model/Notification");
 const notificationRoute = express.Router();
-
-const notificationSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  message: { type: String, required: true },
-  isRead: { type: Boolean, default: false },
-});
-
-const Notification = mongoose.model("Notification", notificationSchema);
 
 //sending notification
 notificationRoute.post("/send", async (req, res) => {
   try {
     let newNotification = new Notification(req.body);
     await newNotification.save();
-    res.status(200).json({ message: "notification set successfully",data:newNotification });
+    res.status(200).json({
+      message: "notification send successfully",
+      data: newNotification,
+    });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }
@@ -25,7 +20,7 @@ notificationRoute.post("/send", async (req, res) => {
 notificationRoute.get("/:id", async (req, res) => {
   try {
     let { id } = req.params;
-    let data = await Notification.find({ userId:id });
+    let data = await Notification.find({ userId: id }).sort({ _id: -1 });
     if (!data) {
       return res.json({ message: "Notification not found" });
     }
@@ -35,10 +30,32 @@ notificationRoute.get("/:id", async (req, res) => {
   }
 });
 
+//reading notification by userId
+notificationRoute.put("/read/:id", async (req, res) => {
+  // res.send(req.params.id)
+  try {
+    let { id } = req.params;
+    let response = await Notification.updateMany(
+      { userId: id },
+      { $set: { isRead: true } }
+    );
+    if (response.acknowledged) {
+      let data = await Notification.find({ userId: id }).sort({ _id: -1 });
+      return res
+        .status(200)
+        .json({ message: "notification read successfully", data });
+    } else {
+      res.json({ message: "Notification not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 notificationRoute.delete("/:id", async (req, res) => {
   try {
     let { id } = req.params;
-    let data = await Notification.findByIdAndDelete({ _id:id });
+    let data = await Notification.findByIdAndDelete({ _id: id });
     if (!data) {
       return res.json({ message: "Notification not found" });
     }

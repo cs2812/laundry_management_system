@@ -13,18 +13,18 @@ import { registerUser } from "../store/auth/auth.Action";
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { register } = useSelector((store) => store.authReducer);
 
-  const [form,setForm]=useState({
-    username:"",
-    email:"",
-    mobile:"",
-    password:""
-  })
-  const handleSignup=()=>{
-    dispatch(registerUser(form))
-  }
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    mobile: "",
+    password: "",
+  });
+  const handleSignup = () => {
+    dispatch(registerUser(form));
+  };
   const redirect = () => {
     navigate("/login");
   };
@@ -57,19 +57,39 @@ const SignupPage = () => {
         <Box p="1rem">
           <FormControl isRequired>
             <FormLabel>Name</FormLabel>
-            <Input onChange={(e)=>{setForm({...form,username:e.target.value})}} placeholder="Name" />
+            <Input
+              onChange={(e) => {
+                setForm({ ...form, username: e.target.value });
+              }}
+              placeholder="Name"
+            />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Email</FormLabel>
-            <Input onChange={(e)=>{setForm({...form,email:e.target.value})}} placeholder="Email" />
+            <Input
+              onChange={(e) => {
+                setForm({ ...form, email: e.target.value });
+              }}
+              placeholder="Email"
+            />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Mobile</FormLabel>
-            <Input onChange={(e)=>{setForm({...form,mobile:e.target.value})}} placeholder="Mobile" />
+            <Input
+              onChange={(e) => {
+                setForm({ ...form, mobile: e.target.value });
+              }}
+              placeholder="Mobile"
+            />
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Password</FormLabel>
-            <Input onChange={(e)=>{setForm({...form,password:e.target.value})}} placeholder="Password" />
+            <Input
+              onChange={(e) => {
+                setForm({ ...form, password: e.target.value });
+              }}
+              placeholder="Password"
+            />
           </FormControl>
           <Button onClick={handleSignup} w="100%" mt="10px" colorScheme="blue">
             Register
