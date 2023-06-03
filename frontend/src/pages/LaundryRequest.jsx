@@ -29,6 +29,7 @@ const LaundryRequest = () => {
   });
 
   const handleSubmit = () => {
+    // console.log(form)
     dispatch(createRequest(form));
   };
   useEffect(() => {
@@ -121,7 +122,6 @@ const LaundryRequest = () => {
             placeholder="Description(if any)"
           />
         </FormControl>
-
         <Button onClick={handleSubmit} mt="10px" colorScheme="blue" w="100%">
           Submit
         </Button>

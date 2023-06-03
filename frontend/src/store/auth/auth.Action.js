@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  GENERATE_PASSWORD_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
   PROFILE_UPDATE,
@@ -61,6 +62,23 @@ export const changePassword = (form) => (dispatch) => {
     });
 };
 
+export const GenerateNewPassword = (form) => (dispatch) => {
+  axios
+    .put(`${baseurl}/forget-password`, form)
+    .then((res) => {
+      if (res.data.message === "Password changed successfully") {
+        dispatch({ type: GENERATE_PASSWORD_SUCCESS });
+        alert("Password Update successfully. Please Login again");
+      } else {
+        console.log("error", res);
+      }
+    })
+    .catch((err) => {
+      console.log("Error", err);
+      alert("Process failed try again");
+    });
+};
+
 export const changeProfile = (form) => (dispatch) => {
   axios
     .put(`${baseurl}/change-profile/${form.userId}`, form)
@@ -97,11 +115,6 @@ export const changeProfileImage = (form) => (dispatch) => {
       console.log("Error", err);
     });
 };
-
-export const  generatePassword=(form)=>(dispatch)=>{
-  
-
-}
 
 export const userLogout = () => (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL });

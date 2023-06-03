@@ -11,31 +11,35 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { verifyOTP } from "../store/auth/otpAction";
+import { GenerateNewPassword } from "../store/auth/auth.Action";
 
 const VerifyCode = () => {
-  const { userId, isOTPverified, isNewPassword } = useSelector((store) => store.authReducer);
-  const navigate = useNavigate()
-  const [code , setCode]=useState("")
+  const { email, isOTPverified, isNewPassword } = useSelector(
+    (store) => store.authReducer
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [otp, setOTP] = useState("");
 
   const [form, setForm] = useState({
-    userId,
-    newPassword:""
+    email,
+    newPassword: "",
   });
-  const handleSendCode = () => {
-    console.log(code)
+  const handleVerifyOTP = () => {
+    dispatch(verifyOTP({ email, otp }));
   };
   const handleSetNewPassword = () => {
-    console.log(form)
+    dispatch(GenerateNewPassword(form));
   };
 
-  useEffect(()=>{
-    if(isNewPassword){
-        navigate("/login")
+  useEffect(() => {
+    if (isNewPassword) {
+      navigate("/login");
     }
-
-  },[isNewPassword])
+  }, [isNewPassword]);
   return (
     <Box bgColor={"#f2f2f2"} h={"100vh"}>
       <Box
@@ -55,8 +59,12 @@ const VerifyCode = () => {
           </Text>
           <Flex gap="20px" justifyContent={"center"} mt="20px">
             <HStack>
-              <PinInput onChange={(e)=>{setCode(e)}}>
-                <PinInputField/>
+              <PinInput
+                onChange={(e) => {
+                  setOTP(e);
+                }}
+              >
+                <PinInputField />
                 <PinInputField />
                 <PinInputField />
                 <PinInputField />
@@ -64,10 +72,10 @@ const VerifyCode = () => {
             </HStack>
             <Button
               isDisabled={isOTPverified === true}
-              onClick={handleSendCode}
+              onClick={handleVerifyOTP}
               colorScheme="whatsapp"
             >
-              Verify code
+              Verify otp
             </Button>
           </Flex>
         </Box>
@@ -77,7 +85,9 @@ const VerifyCode = () => {
             <FormLabel>New password</FormLabel>
             <Input
               isDisabled={isOTPverified === false}
-              onChange={(e) => setForm({ ...form, newPassword: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, newPassword: e.target.value })
+              }
               placeholder="Enter new password"
             />
           </FormControl>

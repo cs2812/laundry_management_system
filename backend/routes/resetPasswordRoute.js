@@ -11,7 +11,6 @@ otpRoute.post("/request", async (req, res) => {
       return res.status(401).send({ message: "User not found" });
     }
     let data = new otpCollection({
-      userId: response.userId,
       email,
       otp,
     });
@@ -23,10 +22,10 @@ otpRoute.post("/request", async (req, res) => {
 });
 
 otpRoute.post("/verify", async (req, res) => {
-  const { userId, otp } = req.body;
+  const { email, otp } = req.body;
   try {
     const response = await otpCollection.findOne({
-      $and: [{ otp }, { userId }],
+      $and: [{ otp }, { email }],
     });
     if (response) {
       return res.status(200).send({ message: "otp verified", data: response });

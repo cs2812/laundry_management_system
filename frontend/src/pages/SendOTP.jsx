@@ -1,25 +1,41 @@
 import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import { sendOTP } from "../store/auth/otpAction";
 
 const SendOTP = () => {
   const { isOTPsent } = useSelector((store) => store.authReducer);
+  const EmailForm = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
-    code: `${Math.floor(1000 + Math.random() * 9000)}`,
+    otp: `${Math.floor(1000 + Math.random() * 9000)}`,
   });
   const handleSendOTP = () => {
-    // dispatch(sendOTP(form))
+    emailjs
+      .sendForm(
+        "service_p59k935",
+        "template_jx77y6o",
+        EmailForm.current,
+        "AHJ-wfEZKk_mMRxqC"
+      )
+      .then(
+        (result) => {
+          dispatch(sendOTP(form));
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
   const handleCancleRequest = () => {
     setForm({
       userId: "",
       email: "",
-      code: "",
+      otp: "",
     });
     navigate("/login");
   };
@@ -42,11 +58,24 @@ const SendOTP = () => {
       >
         {/*<---Form---->*/}
         <Box p="2rem">
+          {/*<---------Sending HTML to user Email------->*/}
+          <form ref={EmailForm} style={{ display: "none" }}>
+            <label>Email</label>
+            <input
+              type="email"
+              name="user_email"
+              defaultValue={form.email || ""}
+            />
+            <input name="message" defaultValue={form.otp || ""} />
+          </form>
+          {/*<---------Visibel Form for User------->*/}
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
+              type="email"
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              placeholder="Enter email"
+              name="user_email"
+              placeholder="Enter your valid email address"
             />
           </FormControl>
           <Box float={"right"} p="1rem 0rem">

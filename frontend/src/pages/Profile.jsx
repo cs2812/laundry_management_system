@@ -90,12 +90,25 @@ const Profile = () => {
               h="120px"
               w="44%"
             >
-              <Image
-                src={data.userImage}
-                borderRadius={"50%"}
-                w="100%"
-                h="100%"
-              />
+              {data.userImage ? (
+                <Image
+                  src={data.userImage}
+                  borderRadius={"50%"}
+                  w="100%"
+                  h="100%"
+                  alt="Profile"
+                />
+              ) : (
+                <Text
+                  mt="45px"
+                  textAlign={"center"}
+                  fontSize={"14px"}
+                  fontWeight={"500"}
+                  color="black"
+                >
+                  Add Profile
+                </Text>
+              )}
             </Box>
             <Box ml="10px">
               <input

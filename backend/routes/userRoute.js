@@ -64,8 +64,8 @@ userRoute.put("/change-password/:id", async (req, res) => {
 
 userRoute.put("/forget-password", async (req, res) => {
   try {
-    const { userId, newPassword } = req.body;
-    const user = await userCollection.findOne({ userId });
+    const { email, newPassword } = req.body;
+    const user = await userCollection.findOne({email});
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }

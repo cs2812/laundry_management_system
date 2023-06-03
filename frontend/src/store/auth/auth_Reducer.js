@@ -1,6 +1,9 @@
 import {
+  GENERATE_PASSWORD_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
+  OTP_REQUEST_SENT,
+  OTP_REQUEST_VERIFIED,
   PROFILE_UPDATE,
   PROFILE_UPDATE_IMAGE,
   REGISTER_USER_SUCCESS,
@@ -9,15 +12,19 @@ import {
 const userId = localStorage.getItem("userId");
 const getUser = localStorage.getItem("username");
 const userAvatar = localStorage.getItem("userImage");
+const email = localStorage.getItem("email");
 const initialState = {
-  isOTPsent :false,
-  isOTPverified:false,
-  isNewPassword:false,
-  isAuth: userId ? true : false,
   register: false,
+  isOTPsent: false,
+  isOTPverified: false,
+  isNewPassword: false,
+  email:email?email:"",
+  isAuth: userId ? true : false,
   username: getUser ? getUser : "Chetan",
   userId: userId ? userId : "",
-  userImage: userAvatar?userAvatar:"https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+  userImage: userAvatar
+    ? userAvatar
+    : "",
 };
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -31,6 +38,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
         isAuth: true,
         username: payload.username,
         userImage: payload.avatar,
+        userId:payload._id
       };
     }
     case LOGIN_USER_FAIL: {
@@ -59,6 +67,33 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userImage: payload.avatar,
+      };
+    }
+    case OTP_REQUEST_SENT: {
+      localStorage.setItem("email", payload.email);
+      return {
+        ...state,
+        email: payload.email,
+        isOTPverified: false,
+        isNewPassword: false,
+        isOTPsent: true,
+      };
+    }
+    case OTP_REQUEST_VERIFIED: {
+      return {
+        ...state,
+        email: payload.email,
+        isOTPsent: false,
+        isNewPassword: false,
+        isOTPverified: true,
+      };
+    }
+    case GENERATE_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        isOTPsent: false,
+        isOTPverified: false,
+        isNewPassword: true,
       };
     }
     default: {

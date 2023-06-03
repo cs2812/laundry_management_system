@@ -9,7 +9,7 @@ import { createNotification } from "../notification/notAction";
 const baseurl = "http://localhost:8080/laundry";
 
 export const acceptRequest = (requestId) => (dispatch) => {
-  console.log("acceptRequest", requestId);
+  // console.log("acceptRequest", requestId);
   axios
     .put(`${baseurl}/confirm-request/${requestId}`)
     .then((res) => {
