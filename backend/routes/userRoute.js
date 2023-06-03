@@ -53,7 +53,27 @@ userRoute.put("/change-password/:id", async (req, res) => {
     }
     user.password = newPassword;
     await user.save();
-    res.status(200).json({ message: "Password changed successfully", data:user });
+    res
+      .status(200)
+      .json({ message: "Password changed successfully", data: user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server error", error });
+  }
+});
+
+userRoute.put("/forget-password", async (req, res) => {
+  try {
+    const { userId, newPassword } = req.body;
+    const user = await userCollection.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.password = newPassword;
+    await user.save();
+    res
+      .status(200)
+      .json({ message: "Password changed successfully", data: user });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "server error", error });
@@ -64,16 +84,34 @@ userRoute.put("/change-profile/:id", async (req, res) => {
   try {
     const { newUsername } = req.body;
     const id = req.params.id;
-    const user = await userCollection.findOne({ _id:id });
+    const user = await userCollection.findOne({ _id: id });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
     user.username = newUsername;
     await user.save();
-    res.status(200).json({ message: "Profile changed successfully",data:user });
+    res
+      .status(200)
+      .json({ message: "Profile changed successfully", data: user });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ message: "server error", error });
+  }
+});
+userRoute.put("/update-profile-image", async (req, res) => {
+  try {
+    const { userId, avatar } = req.body;
+
+    // Update profile image in the database
+    const user = await userCollection.findById({ _id: userId }); // Specify the user ID
+    user.avatar = avatar;
+    await user.save();
+
+    res
+      .status(200)
+      .json({ message: "Profile image updated successfully", data: user });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
   }
 });
 

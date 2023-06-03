@@ -8,6 +8,8 @@ import Profile from "./pages/Profile"
 import LoginPage from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage"
 import RequestStatus from "./pages/RequestStatus";
+import SendOTP from "./pages/SendOTP";
+import VerifyCode from "./pages/VerifyCode";
 // import PrivateRoute from "./HOF/PrivateRoute";
 
 
@@ -24,6 +26,8 @@ function App() {
         <Route path="/request-status" element={<><Navbar/><Flex><SideBar/><RequestStatus/></Flex></>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<SignupPage />} />
+        <Route path="/request-otp" element={<SendOTP/>} />
+        <Route path="/verify-otp" element={<VerifyCode/>} />
       </Routes>
     </Box>
   );

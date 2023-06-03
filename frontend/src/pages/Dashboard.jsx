@@ -34,10 +34,9 @@ const Dashboard = () => {
     { name: "Woolen Cloth Laundry Price", price: 20 },
   ];
   useEffect(() => {
-    dispatch(getRequest(userId));
-    dispatch(getNotification(userId));
-
     if (!isAuth) {
+      dispatch(getRequest(userId));
+      dispatch(getNotification(userId));
       navigate("/login");
     }
   }, [isAuth]);

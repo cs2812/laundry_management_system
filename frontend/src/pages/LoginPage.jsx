@@ -76,7 +76,7 @@ const LoginPage = () => {
           <Text cursor={"pointer"} color={"blue"} onClick={redirect}>
             Create New Account?
           </Text>
-          <Text cursor={"pointer"} color={"blue"}>
+          <Text onClick={()=>{navigate("/request-otp")}} cursor={"pointer"} color={"blue"}>
             Forget Password?
           </Text>
         </Box>

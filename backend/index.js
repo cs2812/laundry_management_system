@@ -1,25 +1,28 @@
-const express = require("express")
+const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors")
+const cors = require("cors");
 const userRoute = require("./routes/userRoute");
 const appRoute = require("./routes/appRoute");
 const notificationRoute = require("./routes/notification");
-require('dotenv').config();
-const app = express()
-const PORT = 8080
+const otpRoute = require("./routes/resetPasswordRoute");
 
-app.use(express.json())
-app.use(cors())
+require("dotenv").config();
+const app = express();
+const PORT = 8080;
 
-app.use("/user",userRoute)
-app.use("/laundry",appRoute)
-app.use("/notification",notificationRoute)
+app.use(express.json());
+app.use(cors());
 
-app.get("/",(req,res)=>{
-    res.send("Welcome to laundry")
-})
+app.use("/user", userRoute);
+app.use("/laundry", appRoute);
+app.use("/notification", notificationRoute);
+app.use("/otp", otpRoute);
 
-app.listen(PORT,async()=>{
-    await mongoose.connect(process.env.MONGODB_LINK)
-    console.log("server is running on",PORT)
-})
+app.get("/", (req, res) => {
+  res.send("Welcome to laundry");
+});
+
+app.listen(PORT, async () => {
+  await mongoose.connect(process.env.MONGODB_LINK);
+  console.log("server is running on", PORT);
+});

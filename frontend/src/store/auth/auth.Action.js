@@ -3,6 +3,7 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
   PROFILE_UPDATE,
+  PROFILE_UPDATE_IMAGE,
   REGISTER_USER_SUCCESS,
 } from "./auth_Type";
 
@@ -42,10 +43,6 @@ export const userLogin = (form) => (dispatch) => {
     });
 };
 
-export const userLogout = () => (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAIL });
-};
-
 export const changePassword = (form) => (dispatch) => {
   axios
     .put(`${baseurl}/change-password/${form.userId}`, form)
@@ -70,7 +67,7 @@ export const changeProfile = (form) => (dispatch) => {
     .then((res) => {
       if (res.data.message === "Profile changed successfully") {
         dispatch({ type: PROFILE_UPDATE, payload: res.data.data });
-        alert("Profile Name changed successfully");
+        // alert("Profile Name changed successfully");
       } else {
         console.log("error", res);
         alert("Process failed");
@@ -80,4 +77,32 @@ export const changeProfile = (form) => (dispatch) => {
       alert("Process failed");
       console.log("Error", err);
     });
+};
+
+export const changeProfileImage = (form) => (dispatch) => {
+  // let {userId,avatar}=form
+  axios
+    .put(`${baseurl}/update-profile-image`, form)
+    .then((res) => {
+      if (res.data.message === "Profile image updated successfully") {
+        dispatch({ type: PROFILE_UPDATE_IMAGE, payload: res.data.data });
+        // alert("Profile image updated successfully");
+      } else {
+        console.log("error", res);
+        alert("Process failed");
+      }
+    })
+    .catch((err) => {
+      alert("Process failed");
+      console.log("Error", err);
+    });
+};
+
+export const  generatePassword=(form)=>(dispatch)=>{
+  
+
+}
+
+export const userLogout = () => (dispatch) => {
+  dispatch({ type: LOGIN_USER_FAIL });
 };
