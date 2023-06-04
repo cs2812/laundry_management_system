@@ -8,7 +8,7 @@ import {
 import { createNotification } from "../notification/notAction";
 import { notify } from "../../utils";
 
-const baseurl = "http://localhost:8080/laundry";
+const baseurl = "https://hyscaler-lms.onrender.com/laundry";
 
 export const getPrice = () => (dispatch) => {
   axios

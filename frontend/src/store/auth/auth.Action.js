@@ -9,7 +9,7 @@ import {
 } from "./auth_Type";
 import { notify } from "../../utils";
 
-const baseurl = "http://localhost:8080/user";
+const baseurl = "https://hyscaler-lms.onrender.com/user";
 
 export const registerUser = (form, toast) => (dispatch) => {
   //   dispatch({ type: AUTH_LOADING_ON });

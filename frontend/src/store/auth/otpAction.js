@@ -2,7 +2,7 @@ import axios from "axios";
 import { OTP_REQUEST_SENT, OTP_REQUEST_VERIFIED } from "./auth_Type";
 import { notify } from "../../utils";
 
-const baseurl = "http://localhost:8080/otp";
+const baseurl = "https://hyscaler-lms.onrender.com/otp";
 
 export const sendOTP = (form, toast) => (dispatch) => {
   axios

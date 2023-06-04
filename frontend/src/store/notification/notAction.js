@@ -8,7 +8,7 @@ import {
 } from "./notType";
 import { notify } from "../../utils";
 
-const baseurl = "http://localhost:8080/notification";
+const baseurl = "https://hyscaler-lms.onrender.com/notification";
 
 export const createNotification = (form,toast) => (dispatch) => {
   axios

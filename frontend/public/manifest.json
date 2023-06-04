@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
+  "short_name": "Laundry App",
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://s3.amazonaws.com/ionic-marketplace/laundry-app-template-app/icon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "https://s3.amazonaws.com/ionic-marketplace/laundry-app-template-app/icon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "https://s3.amazonaws.com/ionic-marketplace/laundry-app-template-app/icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
