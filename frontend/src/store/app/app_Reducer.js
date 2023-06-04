@@ -1,4 +1,5 @@
 import {
+  LAUNDRY_GET_PRICE,
   LAUNDRY_GET_REQUEST_SUCCESS,
   LAUNDRY_REQUEST_CONFIRM,
   LAUNDRY_REQUEST_SUCCESS,
@@ -11,6 +12,7 @@ const initialState = {
   finishRequest: 0,
   currentId: "",
   requests: [],
+  price:{}
 };
 
 export const appReducer = (state = initialState, { type, payload }) => {
@@ -21,6 +23,12 @@ export const appReducer = (state = initialState, { type, payload }) => {
         ...state,
         pendingRequest: state.pendingRequest + 1,
         currentId: payload._id,
+      };
+    }
+    case LAUNDRY_GET_PRICE: {
+      return {
+        ...state,
+        price:payload
       };
     }
     case LAUNDRY_GET_REQUEST_SUCCESS: {

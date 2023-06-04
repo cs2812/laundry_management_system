@@ -12,13 +12,18 @@ import Card from "../components/Card";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getRequest } from "../store/app/app_Action";
+import { getPrice, getRequest } from "../store/app/app_Action";
 import { getNotification } from "../store/notification/notAction";
 
 const Dashboard = () => {
   const { isAuth, userId } = useSelector((store) => store.authReducer);
-  const { pendingRequest, confirmRequest, inprocessRequest, finishRequest } =
-    useSelector((store) => store.appReducer);
+  const {
+    price,
+    pendingRequest,
+    confirmRequest,
+    inprocessRequest,
+    finishRequest,
+  } = useSelector((store) => store.appReducer);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -29,15 +34,17 @@ const Dashboard = () => {
     { count: finishRequest, title: "Finish!", colour: "#fc2747" },
   ];
   let LaundryPrice = [
-    { name: "Top Wear Laundry Price", price: 12 },
-    { name: "Bootom Wear Laundry Price", price: 22 },
-    { name: "Woolen Cloth Laundry Price", price: 20 },
+    { name: "Top Wear Laundry Price", price: price.topwear },
+    { name: "Bootom Wear Laundry Price", price: price.bootomwear },
+    { name: "Woolen Cloth Laundry Price", price: price.woolen },
   ];
   useEffect(() => {
     if (!isAuth) {
+      navigate("/login");
+    } else {
       dispatch(getRequest(userId));
       dispatch(getNotification(userId));
-      navigate("/login");
+      dispatch(getPrice());
     }
   }, [isAuth]);
 
@@ -79,10 +86,7 @@ const Dashboard = () => {
                   <Td fontWeight={500} border={"2px solid #f2f2f2"}>
                     Other Price
                   </Td>
-                  <Td border={"2px solid #f2f2f2"}>
-                    other price depand upon cloth varity(other than above three
-                    category)
-                  </Td>
+                  <Td border={"2px solid #f2f2f2"}>{price.other}</Td>
                 </Tr>
               </Tbody>
             </Table>

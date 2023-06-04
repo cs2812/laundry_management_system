@@ -1,4 +1,11 @@
-import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  useToast,
+} from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +17,7 @@ const SendOTP = () => {
   const EmailForm = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toast = useToast();
   const [form, setForm] = useState({
     email: "",
     otp: `${Math.floor(1000 + Math.random() * 9000)}`,
@@ -17,14 +25,14 @@ const SendOTP = () => {
   const handleSendOTP = () => {
     emailjs
       .sendForm(
-        "service_p59k935",
-        "template_jx77y6o",
+        process.env.REACT_APP_SERVICE_ID,
+        process.env.REACT_APP_TEMPLATE_ID,
         EmailForm.current,
-        "AHJ-wfEZKk_mMRxqC"
+        process.env.REACT_APP_ACCOUNT_ID
       )
       .then(
         (result) => {
-          dispatch(sendOTP(form));
+          dispatch(sendOTP(form, toast));
         },
         (error) => {
           console.log(error.text);

@@ -1,21 +1,27 @@
 import axios from "axios";
 import { OTP_REQUEST_SENT, OTP_REQUEST_VERIFIED } from "./auth_Type";
+import { notify } from "../../utils";
 
 const baseurl = "http://localhost:8080/otp";
 
-export const sendOTP = (form) => (dispatch) => {
+export const sendOTP = (form, toast) => (dispatch) => {
   axios
     .post(`${baseurl}/request`, form)
     .then((res) => {
       dispatch({ type: OTP_REQUEST_SENT, payload: res.data.data });
-      alert("OTP sent on your email. Please check");
+      notify(
+        toast,
+        "OTP sent on email",
+        "success",
+        "OTP sent on your email. Please check"
+      );
     })
     .catch((error) => {
       console.log("Error", error);
-      alert("Process failed");
+      notify(toast, "Process failed", "error");
     });
 };
-export const verifyOTP = (form) => (dispatch) => {
+export const verifyOTP = (form, toast) => (dispatch) => {
   axios
     .post(`${baseurl}/verify`, form)
     .then((res) => {
@@ -23,6 +29,6 @@ export const verifyOTP = (form) => (dispatch) => {
     })
     .catch((error) => {
       console.log("Error", error);
-      alert("Invaild OTP");
+      notify(toast, "Invaild OTP", "error");
     });
 };

@@ -98,6 +98,7 @@ userRoute.put("/change-profile/:id", async (req, res) => {
     res.status(500).json({ message: "server error", error });
   }
 });
+
 userRoute.put("/update-profile-image", async (req, res) => {
   try {
     const { userId, avatar } = req.body;

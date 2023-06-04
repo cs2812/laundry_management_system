@@ -8,6 +8,7 @@ import {
   Image,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +26,7 @@ import axios from "axios";
 const Profile = () => {
   const data = useSelector((store) => store.authReducer);
   const [selected, setSelected] = useState(null);
+  const toast = useToast();
   const dispatch = useDispatch();
   const navitate = useNavigate();
   const [form, setName] = useState({
@@ -38,11 +40,11 @@ const Profile = () => {
   });
   const handleChangePassword = () => {
     // console.log(password)
-    dispatch(changePassword(password));
+    dispatch(changePassword(password, toast));
   };
   const handleChangeProfile = () => {
     // console.log(form)
-    dispatch(changeProfile(form));
+    dispatch(changeProfile(form, toast));
   };
 
   const handleSelectFile = (e) => {
@@ -57,8 +59,12 @@ const Profile = () => {
     axios
       .post("https://api.cloudinary.com/v1_1/du5lflmib/image/upload", formdata)
       .then((res) => {
+        localStorage.setItem("userImage", res.data.url);
         dispatch(
-          changeProfileImage({ userId: data.userId, avatar: res.data.url })
+          changeProfileImage(
+            { userId: data.userId, avatar: res.data.url },
+            toast
+          )
         );
         // console.log(res.data.url);
         setSelected(null);
@@ -66,8 +72,6 @@ const Profile = () => {
       .catch((error) => {
         console.log(error);
       });
-
-    // console.log(response.data);
   };
 
   useEffect(() => {

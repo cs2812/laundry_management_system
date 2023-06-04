@@ -5,6 +5,7 @@ import {
   FormLabel,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,13 +16,14 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuth } = useSelector((store) => store.authReducer);
+  const toast = useToast()
 
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   const handleLogin = () => {
-    dispatch(userLogin(form));
+    dispatch(userLogin(form,toast));
   };
   const redirect = () => {
     navigate("/registration");

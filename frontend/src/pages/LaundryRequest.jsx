@@ -6,6 +6,7 @@ import {
   FormLabel,
   Input,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,8 @@ import { createRequest } from "../store/app/app_Action";
 
 const LaundryRequest = () => {
   const { isAuth, userId } = useSelector((store) => store.authReducer);
+  const toast = useToast();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -30,7 +33,7 @@ const LaundryRequest = () => {
 
   const handleSubmit = () => {
     // console.log(form)
-    dispatch(createRequest(form));
+    dispatch(createRequest(form, toast));
   };
   useEffect(() => {
     if (!isAuth) {

@@ -9,6 +9,7 @@ import {
   PinInput,
   PinInputField,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +23,7 @@ const VerifyCode = () => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toast = useToast()
   const [otp, setOTP] = useState("");
 
   const [form, setForm] = useState({
@@ -29,10 +31,10 @@ const VerifyCode = () => {
     newPassword: "",
   });
   const handleVerifyOTP = () => {
-    dispatch(verifyOTP({ email, otp }));
+    dispatch(verifyOTP({ email, otp },toast));
   };
   const handleSetNewPassword = () => {
-    dispatch(GenerateNewPassword(form));
+    dispatch(GenerateNewPassword(form,toast));
   };
 
   useEffect(() => {

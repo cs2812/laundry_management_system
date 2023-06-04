@@ -1,6 +1,6 @@
 const express = require("express");
 const userCollection = require("../model/userModel");
-const otpCollection = require("../model/resetPasswordModel");
+const {otpCollection} = require("../model/resetPasswordModel");
 const otpRoute = express.Router();
 
 otpRoute.post("/request", async (req, res) => {

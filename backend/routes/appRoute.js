@@ -1,8 +1,27 @@
 const express = require("express");
 const appRoute = express.Router();
 const LaundryRequest = require("../model/appModel");
+const { laundryPrice } = require("../model/resetPasswordModel");
 
-// get user request
+// get laundry requests
+appRoute.get("/price", async (req, res) => {
+  try {
+    let data = await laundryPrice.find();
+    res.status(200).json({ data:data[0] });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+appRoute.post("/set-price", async (req, res) => {
+  try {
+    let data = new laundryPrice(req.body);
+    await data.save();
+    res.status(200).json({ data });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 appRoute.get("/:id", async (req, res) => {
   try {
     let { id } = req.params;

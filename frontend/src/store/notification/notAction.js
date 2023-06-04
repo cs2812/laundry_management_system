@@ -6,15 +6,16 @@ import {
   NOTIFICATION_GET,
   NOTIFICATION_READ,
 } from "./notType";
+import { notify } from "../../utils";
 
 const baseurl = "http://localhost:8080/notification";
 
-export const createNotification = (form) => (dispatch) => {
+export const createNotification = (form,toast) => (dispatch) => {
   axios
     .post(`${baseurl}/send`, form)
     .then((res) => {
       dispatch({ type: NOTIFICATION_CREATED, payload: res.data.data });
-      alert("Request Aceepted");
+      notify(toast,"Request Accepted","success")
     })
     .catch((error) => {
       console.log("Error", error);

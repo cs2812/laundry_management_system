@@ -14,8 +14,8 @@ const appSchema = new mongoose.Schema(
     bottomwears: { type: String, default: "NO" },
     woolenCloths: { type: String, default: "NO" },
     contactNumber: { type: String },
-    others: { type: String, default: "No" },
-    discription: { type: String, default: "NO" },
+    others: { type: String, default: "NO" },
+    description: { type: String, default: "NO" },
   },
   {
     versionKey: false,
